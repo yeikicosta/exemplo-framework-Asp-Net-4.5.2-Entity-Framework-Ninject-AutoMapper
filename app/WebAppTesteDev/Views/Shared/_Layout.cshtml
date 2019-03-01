@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Desenvolvimento - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+<body>
+    <div>
+        <h5 class="text-center">Teste Desenvolvimento</h5>
+    </div>
+    @{ 
+        string MenuProduct = WebAppTesteDev.Resources.ResourceGlobal.Menu_Product;
+        string MenuCategory = WebAppTesteDev.Resources.ResourceGlobal.Menu_Category;
+    }
+    <p class="text-center">
+        @Html.ActionLink(MenuProduct, "List", "Product", null, new { @class = "btn btn-link" }) |
+        @Html.ActionLink(MenuCategory, "List", "Category", null, new { @class = "btn btn-link" })
+    </p>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Teste Desenvolvimento</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

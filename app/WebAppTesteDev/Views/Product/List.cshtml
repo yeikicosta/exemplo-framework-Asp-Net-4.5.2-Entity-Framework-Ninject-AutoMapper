@@ -1,0 +1,45 @@
+﻿@{
+    string ButtonNew = @ViewBag.ButtonNew.ToString();
+    string ButtonEdit = @ViewBag.ButtonEdit.ToString();
+    string ButtonRemove = @ViewBag.ButtonRemove.ToString();
+    string ButtonDetails = @ViewBag.ButtonDetails.ToString();
+}
+<div class="form-horizontal">
+    <h4>@ViewBag.Title</h4>
+    <hr />
+    <p>
+        @Html.ActionLink(ButtonNew, "Add")
+    </p>
+    <div style="width:30%;float:left">
+        <input type="text" name="busca" id="busca" value="" placeholder="Informe o nome do produto" class="form-control" />
+    </div>
+    <div style="width:70%;float:left"><button type="button" class="btn btn-secondary" onclick="buscar()">Buscar</button>
+    </div>
+    <div>&nbsp;</div>
+    <div id="result">
+        Carregando...
+    </div>
+
+</div>
+@section scripts{
+
+
+<script>
+    $(document).ready(function () {
+        buscar();
+    });
+    function buscar() {
+        $.get("/Product/ListAjax?name=" + $("#busca").val(), function (data) {
+            $("#result").html(data);
+        });
+    }
+    function excluir(id) {
+        if (confirm("Confirma exclusão ?")) {
+            $.get("/Product/Delete?id=" + id.toString(), function (data) {
+                buscar();
+            });
+        }
+    }
+</script>
+}
+

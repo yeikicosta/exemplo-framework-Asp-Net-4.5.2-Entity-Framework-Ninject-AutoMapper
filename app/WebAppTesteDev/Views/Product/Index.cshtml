@@ -1,0 +1,40 @@
+﻿@model List<WebAppTesteDev.Models.ViewModelProduct>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="table-responsive-xl">
+    <table class="table table-hover" cellspacing="0">
+        <thead>
+            <tr class="d-flex">
+                <th scope="col" class="col-md-2">Imagem</th>
+                <th scope="col" class="col-md-3">Nome</th>
+                <th scope="col" class="col-md-3">Categoria</th>
+                <th scope="col">Preço</th>
+                <th scope="col" colspan="2" class="col-md-1">Ação</th>
+            </tr>
+        </thead>
+        <tbody id="listaProdutos">
+            @{
+                if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr >
+                            <td><img src="~/Content/images/products/@item.Image" class="imagem" /></td>
+                            <td>@item.Category.Name</td>
+                            <td>@item.Name</td>
+                            <td>@string.Format("{0:C}", item.Price)</td>
+                            <td>
+                                <a href="@Url.Action("Alterar", "Produto", new { IdProduto = item.Id })"><i class="far fa-edit"></i></a>
+                            </td>
+                            <td>
+                                <a href=""><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
